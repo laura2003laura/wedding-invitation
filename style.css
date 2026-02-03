@@ -1,0 +1,702 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Cormorant Garamond', serif;
+    background: black;
+}
+
+.phone {
+    width: 100%;
+    max-width: 430px;
+    aspect-ratio: 9 / 16;
+    margin: auto;
+    position: relative;
+    background: black;
+    overflow: hidden;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 1s ease, background-color 1s ease;
+}
+
+/* -------- Էջ 1 -------- */
+.page-1 {
+    background-image: url("nkar1.jpg.jpg");
+    background-size: cover;
+    background-position: center;
+    transform: translateY(0);
+}
+
+.page-1.hide {
+    transform: translateY(-100%);
+}
+
+.title-main {
+    position: absolute;
+    top: 5%;
+    width: 100%;
+    text-align: center;
+    color: black;
+    font-size: 36px;
+    letter-spacing: 4px;
+}
+
+.open-btn {
+    position: absolute;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 14px 40px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+/* -------- Էջ 2 -------- */
+.page-2 {
+    background-color: #f6f1ea;
+    text-align: center;
+    padding-top: 50px;
+    transform: translateY(100%);
+    overflow-y: auto;
+}
+
+.page-2.show {
+    transform: translateY(0);
+}
+
+.wedding-day {
+    font-size: 40px;
+    letter-spacing: 4px;
+    color: black;
+    margin-bottom: 30px;
+}
+
+/* Նկարի անիմացիա (էջ 2) */
+.page-2 .photo-wrapper {
+    width: 70%;
+    margin: 0 auto 30px;
+    position: relative;
+    opacity: 0;
+    transform: rotate(-6deg) scale(0.95);
+    transition: all 1.2s ease;
+}
+
+.page-2.show .photo-wrapper {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+.photo-wrapper img {
+    width: 100%;
+    display: block;
+    border-radius: 12px; /* Փոքր կլորեցում */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.date-overlay {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 24px;
+}
+
+.date-overlay span {
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: black;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 8px 14px;
+    border-radius: 4px;
+}
+
+.names {
+    font-size: 32px;
+    letter-spacing: 3px;
+    color: black;
+}
+
+/* -------- Էջ 3 -------- */
+.page-3 {
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.invite-bg {
+    width: 100%;
+    height: 150px;
+    background-color: #f6f1ea;
+}
+
+.invite-text {
+    margin-top: 20px;
+    color: black;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.calendar-wrapper {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.calendar-wrapper .month {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.calendar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.calendar .day {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.calendar .day.special {
+    background: #ff6b6b;
+    color: white;
+    border-radius: 50%;
+}
+
+/* -------- Նկար 3 (էջ 3) -------- */
+.page-3 .photo-wrapper {
+    width: 70%; /* Նույն չափ, ինչ Էջ 2 */
+    margin: 30px auto 40px;
+    position: relative;
+    border-radius: 16px; /* Մի փոքր թեթև կլորեցում */
+    overflow: hidden;
+    opacity: 0;
+    transform: rotate(-8deg) scale(0.95);
+    transition: all 1.2s ease;
+}
+
+.page-3.show .photo-wrapper {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+.page-3 .photo-wrapper img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* -------- Location և For You -------- */
+.location {
+    font-size: 46px; /* Location մեծացվել է */
+    text-align: center;
+    margin-top: 20px;
+    color: gray;
+    font-style: italic; /* Ավելացվել է իթալիկ */
+}
+
+.for-you {
+    font-size: 42px; /* For You մեծացվել է */
+    text-align: center;
+    margin-top: 5px;
+    color: gray;
+    font-style: italic;
+    font-weight: 400; /* Պետք է նուրբ լինի */
+}
+/* -------- 3-րդ նկարի անընդհատ թեքման անիմացիա -------- */
+@keyframes floatRotate {
+    0% {
+        transform: rotate(-8deg) scale(0.95);
+        opacity: 0.85;
+    }
+    50% {
+        transform: rotate(8deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(-8deg) scale(0.95);
+        opacity: 0.85;
+    }
+}
+
+.page-3.show .photo-wrapper {
+    animation: floatRotate 6s ease-in-out infinite;
+}
+.wedding-location {
+    text-align: center;
+    margin: 40px 0;
+    color: black;
+}
+
+.location-icon {
+    font-size: 64px;
+    margin-bottom: 15px;
+}
+
+.location-text p {
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+.church-name {
+    font-weight: 700;
+    color: #000; /* մուգ սև */
+    font-size: 22px;
+}
+
+.church-icon {
+    font-size: 48px;
+    margin: 15px 0;
+    color: black;
+}
+
+.map-button-wrapper {
+    margin-top: 15px;
+}
+
+.map-btn {
+    display: inline-block;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.map-btn:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+.wedding-location {
+    text-align: center;
+    margin: 40px 0;
+    color: black;
+}
+
+.location-icon img,
+.church-icon img,
+.map-icon {
+    width: 64px; /* կարող եք փոխել ըստ ցանկության */
+    height: auto;
+    margin-bottom: 15px;
+}
+
+/* Տեքստեր */
+.location-text p {
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+.church-name {
+    font-weight: 700;
+    color: #000;
+    font-size: 22px;
+}
+
+/* Քարտեզի կոճակ */
+.map-button-wrapper {
+    margin-top: 15px;
+}
+
+.map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.map-btn:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+.map-btn img.map-icon {
+    width: 24px;
+    height: 24px;
+}
+.location-icon img,
+.church-icon img {
+    width: 100px;  /* այստեղ գրեք ցանկալի լայնությունը */
+    height: auto;  /* պահում է пропորզիան */
+    margin-bottom: 15px;
+}
+.location-icon img,
+.church-icon img {
+    width: 150px;
+    height: auto;
+}
+.extra-church-image img {
+    width: 100px;   /* նույն չափը, ինչ church-icon */
+    height: auto;
+    margin: 10px auto 0;  /* վերևից փոքր բացվածք և կենտրոնացում */
+    display: block;  /* կենտրոնացնել */
+}
+.map-text {
+    text-align: center;
+    margin-top: 15px;
+    color: black;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.map-text .hall-name {
+    font-weight: 700;
+    font-size: 20px; /* կարևորությամբ ավելի մեծ */
+}
+
+.map-church-image img {
+    width: 200px;   /* նույն չափը, ինչ church-icon */
+    height: auto;
+    display: block;
+    margin: 10px auto 0;  /* վերևից բացվածք և կենտրոնացում */
+}
+.hall-location {
+    text-align: center;
+    margin-top: 30px; /* վերընթաց բացվածք նախորդ section-ից */
+    color: black;
+}
+
+.hall-text {
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.hall-text .hall-name {
+    font-weight: 700;
+    font-size: 20px; /* ավելի կարևոր տող */
+    margin: 5px 0;
+}
+
+.hall-image img {
+    width: 150px;   /* նույն չափը, ինչ church-icon */
+    height: auto;
+    display: block;
+    margin: 10px auto 0; /* վերևից բացվածք և կենտրոնացում */
+}
+.hall-location {
+    text-align: center;
+    margin-top: 30px; /* վերևից բացվածք */
+    color: black;
+}
+
+.hall-text {
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.hall-text .hall-name {
+    font-weight: 700;
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.hall-image img {
+    width: 200px;   /* նույն չափը, ինչ church-icon */
+    height: auto;
+    display: block;
+    margin: 10px auto 10px; /* վերևից և ներքևից բացվածք */
+}
+
+.hall-map-button {
+    margin-top: 10px; /* փոքր բացվածք նկարի և button-ի միջև */
+}
+
+.hall-map-button .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.hall-map-button .map-btn:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+.hall-map-button .map-btn .map-icon {
+    width: 24px;
+    height: 24px;
+}
+.hall-info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 20px; /* բացվածք button-ից */
+    gap: 15px; /* բացվածք գծի և տեքստի միջև */
+}
+
+/* Ուղղահայաց գիծ */
+.hall-info .vertical-line {
+    width: 2px;          /* գծի լայնությունը */
+    height: 80px;        /* միջին երկարություն, կարող եք փոխել */
+    background-color: black;
+}
+
+/* Տեքստը գծի կողքին */
+.hall-info .info-text {
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.5;
+    color: black;
+}
+
+.hall-info .info-text p {
+    margin: 2px 0;
+}
+.hall-line-text {
+    position: relative;
+    margin: 25px auto 0;
+    width: 80%;      /* գծի երկարությունը */
+    text-align: center;
+}
+
+/* Երկար գիծ */
+.hall-line-text .line {
+    height: 2px;          /* գծի հաստությունը */
+    background-color: black;
+    width: 100%;
+    position: absolute;
+    top: 50%;              /* կենտրոնում տեղադրում */
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+/* Տեքստը գծի վրա */
+.hall-line-text .line-text {
+    position: relative;
+    display: inline-block;
+    z-index: 2;            /* գծի վրա */
+    background-color: white; /* կարող եք հարմար փոխել, եթե ֆոնը սպիտակ է */
+    padding: 0 10px;
+    font-size: 20px;       /* ավելի մեծ տառեր */
+    font-weight: 700;
+    color: black;
+    line-height: 1.5;
+}
+.vertical-line-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* բացվածք գծի և տեքստի միջև */
+    margin-top: 20px;
+    justify-content: center; /* կենտրոնացնել ողջ բլոկը */
+}
+
+.vertical-line-text .line {
+    width: 2px;         /* գծի հաստությունը */
+    height: 120px;      /* երկարությունը, կարող եք փոխել */
+    background-color: black;
+}
+
+.vertical-line-text .text-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* տեքստը գծի կենտրոնում տեղավորել */
+    font-size: 18px;         /* մեծ տառեր */
+    font-weight: 600;
+    color: black;
+}
+
+.vertical-line-text .text-block p {
+    margin: 2px 0; /* տողերի միջև փոքր բացվածք */
+}
+.hall-map-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Map button */
+.hall-map-section .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-bottom: 20px; /* բացվածք button-ից գծի համար */
+}
+
+.hall-map-section .map-btn:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+.hall-map-section .map-btn .map-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Ուղղահայաց գիծ + տեքստը */
+.line-with-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.line-with-text .vertical-line {
+    width: 2px;
+    height: 80px; /* երկարությունը, կարող եք փոխել */
+    background-color: black;
+    margin-bottom: 10px; /* բացվածք գծի և տեքստի միջև */
+}
+
+.line-with-text .line-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: black;
+}
+
+.line-with-text .line-text p {
+    margin: 2px 0; /* տողերի միջև բացվածք */
+}
+.bride-location {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+/* Map button */
+.bride-location .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-bottom: 20px; /* բացվածք button-ից գծի համար */
+}
+
+.bride-location .map-btn:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+.bride-location .map-btn .map-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Ուղղահայաց գիծ + տեքստը */
+.bride-location .line-with-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bride-location .line-with-text .vertical-line {
+    width: 2px;
+    height: 120px; /* երկարությունը՝ նույնը, ինչ նախորդ section-ում */
+    background-color: black;
+    margin-bottom: 10px;
+}
+
+.bride-location .line-with-text .line-text {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: black;
+}
+
+.bride-location .line-with-text .line-text p {
+    margin: 2px 0;
+}
+
+.countdown-section {
+    text-align: center;
+    margin: 40px 0;
+    color: black;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.countdown-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.countdown-timer {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+}
+
+.countdown-timer span {
+    display: inline-block;
+    min-width: 50px;
+}
+
+.countdown-labels {
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 5px;
+}
+
+.wedding-date {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 5px;
+}
